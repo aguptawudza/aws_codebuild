@@ -5,4 +5,5 @@ build-timeout:latest
 git:latest
 github-branch-source:latest
 gradle:latest
+matrix-auth:latest
 ws-cleanup:latest
