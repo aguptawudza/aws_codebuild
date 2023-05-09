@@ -1,4 +1,5 @@
-FROM jenkins/jenkins
+FROM jenkins/jenkins:latest
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 USER root
 
 RUN apt-get update && apt-get install python3-pip -y && \
