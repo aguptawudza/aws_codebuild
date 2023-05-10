@@ -10,3 +10,4 @@ github-branch-source:latest
 gradle:latest
 matrix-auth:latest
 ws-cleanup:latest
+ansicolor:1.0.2
