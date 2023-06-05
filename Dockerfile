@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install python3 -y && \
     apt-get install python3-pip -y && \
     pip3 install ansible --upgrade && \
     pip3 install boto3 --upgrade && \
+    pip3 install botocore --upgrade && \
     apt-get upgrade -y && apt-get update
 USER jenkins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
