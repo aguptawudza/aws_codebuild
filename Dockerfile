@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install python3 -y && \
     pip3 install boto3 --upgrade && \
     pip3 install botocore --upgrade && \
     apt-get upgrade -y && apt-get update
-RUN echo mkdir -p /root/.ssh/
+RUN mkdir -p /root/.ssh/
 RUN touch /root/.ssh/config
 RUN echo "Include /opt/monoly/deployment/hosts/*" > /root/.ssh/config    
 USER jenkins
