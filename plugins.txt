@@ -11,3 +11,4 @@ gradle:latest
 matrix-auth:latest
 ws-cleanup:latest
 ansicolor:1.0.2
+pipeline-build-step:latest
