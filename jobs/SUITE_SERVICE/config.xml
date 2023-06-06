@@ -1,0 +1,86 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1308.v58d48a_763b_31">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2133.ve46a_6113dfc3"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2133.ve46a_6113dfc3">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description>Jenkins Job to complete the below tasks.&#xd;
+1) Create AWS Infrastructure for ME Service&#xd;
+2) Configure provisioned Instances&#xd;
+3) Deploy Swarm Cluster&#xd;
+4) Deploy Monoly Suite Service</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>30</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>CID</name>
+          <description>Please provide the CID value</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>cluster</name>
+          <description>Cluster Name</description>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3673.v5b_dd74276262">
+    <script>pipeline 
+{
+    agent any
+    stages 
+    {
+        stage(&apos;Infra Provisioning for Monoly SUITE Service&apos;) 
+        {
+            steps 
+            {
+                script
+                {
+                        build job: &apos;create-service-infra&apos; , parameters:[
+                            string(name: &apos;CID&apos;,value: &quot;${CID}&quot;),
+                            string(name: &apos;cluster&apos;,value: &quot;${cluster}&quot;)]
+                }
+            }
+        }
+        stage(&apos;Configure Monoly Enterprise Instances&apos;) {
+            steps {
+                script {
+                    build job: &quot;setup_vm&quot; , parameters:[ 
+                        string(name: &apos;CID&apos;,value: &quot;${CID}&quot;),
+                        string(name: &apos;cluster&apos;,value: &quot;${cluster}&quot;)]
+                }
+            }
+        }
+        stage(&apos;Provision Docker Swarm Cluster&apos;) {
+            steps {
+                script {
+                    build job: &quot;deploy_cluster&quot; , parameters:[ 
+                        string(name: &apos;CID&apos;,value: &quot;${CID}&quot;),
+                        string(name: &apos;cluster&apos;,value: &quot;${cluster}&quot;)
+                    ]
+                } 
+            }
+        }
+        
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
