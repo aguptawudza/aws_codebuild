@@ -12,3 +12,6 @@ matrix-auth:latest
 ws-cleanup:latest
 ansicolor:1.0.2
 pipeline-build-step:latest
+parameterized-trigger:2.45
+pipeline-rest-api:2.32
+pipeline-milestone-step:111.v449306f708b_7
