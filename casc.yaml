@@ -15,6 +15,3 @@ jenkins:
       authenticators:
       - global:
           strategy: triggeringUsersAuthorizationStrategy
-unclassified:        
-  location: 
-    url: http://0.0.0.0:8080/
