@@ -2,8 +2,8 @@ ant:latest
 ansible:latest
 ansicolor:1.0.2
 antisamy-markup-formatter:latest
-authorize-project:latest
-build-timeout:latest
+authorize-project:1.7.0
+build-timeout:1.31
 cloudbees-folder:latest
 configuration-as-code:latest
 credentials-binding:latest
