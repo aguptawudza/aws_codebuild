@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:latest
+FROM jenkins/jenkins:lts-jkd11
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false
 ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc.yaml
 USER root
@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install python3 -y && \
     pip3 install botocore --upgrade && \
     apt-get upgrade -y && apt-get update
 RUN mkdir -p /root/.ssh/
-RUN touch /root/.ssh/config
 RUN echo "Include /opt/monoly/deployment/hosts/*" > /root/.ssh/config    
 USER jenkins
 COPY --chown=jenkins:jenkins plugins.txt /usr/share/jenkins/ref/plugins.txt
