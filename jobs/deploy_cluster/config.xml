@@ -60,12 +60,12 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>CID</key>
-          <secretValue>{AQAAABAAAAAQOR+zvxd037DVOmLnXEyO6sywsJV8n4YeNJOo85/TBow=}</secretValue>
+	  <value>${CID}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>cluster</key>
-          <secretValue>{AQAAABAAAAAQHsws0ekqhN8W0yAb8wtM+RUaiXZm3T3UnDDe9bKAtkk=}</secretValue>
+	  <value>${cluster}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

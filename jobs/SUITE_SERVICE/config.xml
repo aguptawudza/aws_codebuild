@@ -82,5 +82,6 @@
     <sandbox>true</sandbox>
   </definition>
   <triggers/>
+  <authToken>8331488752</authToken>
   <disabled>false</disabled>
 </flow-definition>

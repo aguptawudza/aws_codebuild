@@ -79,5 +79,6 @@
     <sandbox>true</sandbox>
   </definition>
   <triggers/>
+  <authToken>9012873465</authToken>
   <disabled>false</disabled>
 </flow-definition>

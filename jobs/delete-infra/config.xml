@@ -52,13 +52,8 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>CID</key>
-          <secretValue>{AQAAABAAAAAQOR+zvxd037DVOmLnXEyO6sywsJV8n4YeNJOo85/TBow=}</secretValue>
+	  <secretValue>${CID}</secretValue>
           <hidden>false</hidden>
-        </org.jenkinsci.plugins.ansible.ExtraVar>
-        <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key></key>
-          <secretValue>{AQAAABAAAAAQTZTeIfD+fOYt/Ad3/1ZPgFHr81JRdwnRgJicaPmGI+A=}</secretValue>
-          <hidden>true</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
     </org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder>
