@@ -3,6 +3,7 @@ ansible:latest
 ansicolor:1.0.2
 antisamy-markup-formatter:latest
 authorize-project:1.7.0
+build-token-root:latest
 build-timeout:1.31
 cloudbees-folder:latest
 configuration-as-code:latest
