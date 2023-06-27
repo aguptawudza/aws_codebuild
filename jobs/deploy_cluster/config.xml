@@ -15,13 +15,13 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>CID</name>
-          <description>Please provide the CID value</description>
+          <name>ent_name</name>
+          <description>Please provide the Enterprise Name</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>cluster</name>
-          <description>Please provide the Cluster Name</description>
+          <name>service_name</name>
+          <description>Service Name</description>
           <defaultValue>monoly</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
@@ -59,13 +59,13 @@
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>CID</key>
-	  <value>${CID}</value>
+          <key>ent_name</key>
+          <secretValue>{AQAAABAAAAAQFSYS9hW1wxhKGh1UKbS7X4EfkkNWgNCbFAo8owhrcE0=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>cluster</key>
-	  <value>${cluster}</value>
+          <key>service_name</key>
+          <secretValue>{AQAAABAAAAAQW7SLhWJU1f0tYbzMHX6T1i6XBfqLWER2Hxh1CFtc6vg=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

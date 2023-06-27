@@ -15,8 +15,8 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>CID</name>
-          <description>Please provide the CID value</description>
+          <name>ent_name</name>
+          <description>Please provide Enterprise Name</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -27,6 +27,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>9012873465</authToken>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
@@ -51,8 +52,8 @@
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>CID</key>
-	  <secretValue>${CID}</secretValue>
+          <key>ent_name</key>
+          <secretValue>{AQAAABAAAAAQKgugq/vCS8aP5i0tpE5zImt3ybHJT2ylh7whpfalX4k=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

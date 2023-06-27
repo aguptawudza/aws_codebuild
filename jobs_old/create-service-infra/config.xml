@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Setup VMs</description>
+  <description>Create Service Infra</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -15,13 +15,13 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>ent_name</name>
-          <description>Please provide the Enterprise Name</description>
+          <name>CID</name>
+          <description>Please provide the CID value</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>service_name</name>
-          <description>Service Name</description>
+          <name>cluster</name>
+          <description>Please provide the Cluster Name</description>
           <defaultValue>monoly</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
@@ -37,7 +37,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
-      <playbook>/deployment/ansible/playbooks/memc/setup-vm.yml</playbook>
+      <playbook>/deployment/ansible/playbooks/memc/create-service-infra.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
         <path>/deployment/ansible/playbooks/memc/inventory</path>
       </inventory>
@@ -55,17 +55,17 @@
       <unbufferedOutput>true</unbufferedOutput>
       <colorizedOutput>false</colorizedOutput>
       <disableHostKeyChecking>false</disableHostKeyChecking>
-      <additionalParameters>-vv</additionalParameters>
+      <additionalParameters></additionalParameters>
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQ4EjMeMiniw6ZRYUxrOjHN6L8RuneNLxRjLudc5ZI1Lc=}</secretValue>
+          <key>CID</key>
+	  <value>${CID}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQOG4bkaG2yKDJq2U1avo3gEx+U0cnwrkCy1u+nPaFcdw=}</secretValue>
+          <key>cluster</key>
+	  <value>${cluster}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

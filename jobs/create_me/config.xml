@@ -15,8 +15,32 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>CID</name>
-          <description>Please provide the CID value</description>
+          <name>ent_name</name>
+          <description>Please provide the newMonoly Enterprise Name</description>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>region</name>
+          <description>AWS RegionName</description>
+          <defaultValue>us-east-1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>app_node_count</name>
+          <description>Number of App Nodes</description>
+          <defaultValue>1</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>db_node_count</name>
+          <description>Number of DB Nodes</description>
+          <defaultValue>1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>core_url</name>
+          <description>Core Server URL</description>
+          <defaultValue>monoly.net</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -30,7 +54,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@174.vfd5323d2b_9d8">
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
       <playbook>/deployment/ansible/playbooks/memc/me-infra-create.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryDoNotSpecify"/>
       <limit></limit>
@@ -47,12 +71,32 @@
       <unbufferedOutput>true</unbufferedOutput>
       <colorizedOutput>false</colorizedOutput>
       <disableHostKeyChecking>false</disableHostKeyChecking>
-      <additionalParameters></additionalParameters>
+      <additionalParameters>-vv</additionalParameters>
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>CID</key>
-          <value>${CID}</value>
+          <key>ent_name</key>
+          <secretValue>{AQAAABAAAAAQ0hbpMTuHoLeYEEOulpT59OJ4fwkrfrQLxfw7qNf3gQI=}</secretValue>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>region</key>
+          <secretValue>{AQAAABAAAAAQ5z9QorvwzvGR4Un8UTTuhGifeUhmNv1nsCCeH/idefQ=}</secretValue>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>app_node_count</key>
+          <secretValue>{AQAAABAAAAAgvA3TkEm7jUCwioVwottLkwI6sOntp7ttzTgP+LtIESjC1EYWRqoZujwQkpk/EE9P}</secretValue>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>db_node_count</key>
+          <secretValue>{AQAAABAAAAAgqvu1chQyIs9ngTS6shoH7SURIXHPo/yJXw0HhFWDp3eGawFyfhz5pnR9XDVbMyLW}</secretValue>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>core_url</key>
+          <secretValue>{AQAAABAAAAAQxvQ591CZ5XARobNc3hKoQ6RuhCvCBgXoByVW/r0csH8=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

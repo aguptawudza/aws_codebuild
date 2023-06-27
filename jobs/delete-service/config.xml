@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Delete Terminate</description>
+  <description>Delete Service</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -15,14 +15,14 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>CID</name>
-          <description>Please provide the CID value</description>
-          <trim>false</trim>
+          <name>ent_name</name>
+          <description>Please provide the Enterprise Name</description>
+          <trim>true</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>cluster</name>
-          <description>Please provide the Cluster Name</description>
-          <defaultValue>monoly</defaultValue>
+          <name>service_name</name>
+          <description>Name of the Service which needs to be deployed</description>
+          <defaultValue>suite</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -33,6 +33,7 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>9012873465</authToken>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
@@ -59,13 +60,13 @@
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>CID</key>
-	  <secretValue>${CID}</secretValue>
+          <key>ent_name</key>
+          <secretValue>{AQAAABAAAAAQ5af4Rl978X/zZZ8Y9nxhrRgEDPnlyEMesrxhSeS2wlk=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>cluster</key>
-	  <secretValue>${cluster}</secretValue>
+          <key>service_name</key>
+          <secretValue>{AQAAABAAAAAQ/Eib6o720pN4zCoZ/Bfmij65hteue1+vZqkAs37PCIo=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

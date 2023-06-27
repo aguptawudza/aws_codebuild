@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Setup VMs</description>
+  <description>Delete Infra</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -15,14 +15,8 @@
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
-          <name>ent_name</name>
-          <description>Please provide the Enterprise Name</description>
-          <trim>false</trim>
-        </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>service_name</name>
-          <description>Service Name</description>
-          <defaultValue>monoly</defaultValue>
+          <name>CID</name>
+          <description>Please provide the CID value</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -37,10 +31,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
-      <playbook>/deployment/ansible/playbooks/memc/setup-vm.yml</playbook>
-      <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
-        <path>/deployment/ansible/playbooks/memc/inventory</path>
-      </inventory>
+      <playbook>/deployment/ansible/playbooks/memc/me-infra-terminate.yml</playbook>
+      <inventory class="org.jenkinsci.plugins.ansible.InventoryDoNotSpecify"/>
       <limit></limit>
       <tags></tags>
       <skippedTags></skippedTags>
@@ -59,13 +51,8 @@
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQ4EjMeMiniw6ZRYUxrOjHN6L8RuneNLxRjLudc5ZI1Lc=}</secretValue>
-          <hidden>false</hidden>
-        </org.jenkinsci.plugins.ansible.ExtraVar>
-        <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQOG4bkaG2yKDJq2U1avo3gEx+U0cnwrkCy1u+nPaFcdw=}</secretValue>
+          <key>CID</key>
+	  <secretValue>${CID}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
