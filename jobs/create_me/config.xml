@@ -76,27 +76,27 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQ0hbpMTuHoLeYEEOulpT59OJ4fwkrfrQLxfw7qNf3gQI=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>region</key>
-          <secretValue>{AQAAABAAAAAQ5z9QorvwzvGR4Un8UTTuhGifeUhmNv1nsCCeH/idefQ=}</secretValue>
+          <value>${region}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>app_node_count</key>
-          <secretValue>{AQAAABAAAAAgvA3TkEm7jUCwioVwottLkwI6sOntp7ttzTgP+LtIESjC1EYWRqoZujwQkpk/EE9P}</secretValue>
+          <value>${app_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_node_count</key>
-          <secretValue>{AQAAABAAAAAgqvu1chQyIs9ngTS6shoH7SURIXHPo/yJXw0HhFWDp3eGawFyfhz5pnR9XDVbMyLW}</secretValue>
+	  <value>${db_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>core_url</key>
-          <secretValue>{AQAAABAAAAAQxvQ591CZ5XARobNc3hKoQ6RuhCvCBgXoByVW/r0csH8=}</secretValue>
+          <value>${CORE_URL}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

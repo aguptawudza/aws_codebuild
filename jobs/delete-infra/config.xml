@@ -53,7 +53,7 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQKgugq/vCS8aP5i0tpE5zImt3ybHJT2ylh7whpfalX4k=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
