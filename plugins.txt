@@ -22,7 +22,6 @@ parameterized-trigger:2.45
 pipeline-build-step:latest
 pipeline-github-lib:latest
 pipeline-stage-view:latest
-pipeline-rest-api:2.32
 pipeline-milestone-step:111.v449306f708b_7
 ssh-slaves:latest
 timestamper:latest
