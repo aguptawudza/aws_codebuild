@@ -61,12 +61,12 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQ5af4Rl978X/zZZ8Y9nxhrRgEDPnlyEMesrxhSeS2wlk=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQ/Eib6o720pN4zCoZ/Bfmij65hteue1+vZqkAs37PCIo=}</secretValue>
+	  <value>${service_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

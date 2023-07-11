@@ -25,6 +25,11 @@
           <defaultValue>monoly</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>core_url</name>
+          <description>CORE URL</description>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -36,7 +41,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@240.vc26740a_625c0">
       <playbook>/deployment/ansible/playbooks/memc/setup-vm.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
         <path>/deployment/ansible/playbooks/memc/inventory</path>
@@ -65,7 +70,12 @@
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <value>${service-name}</value>
+          <value>${service_name}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>core_url</key>
+          <value>${core_url}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

@@ -43,6 +43,24 @@
           <defaultValue>monoly.net</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>access_instance_type</name>
+          <description>access_instance_type</description>
+          <defaultValue>t3.micro</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>app_instance_type</name>
+          <description>app_instance_type</description>
+          <defaultValue>t3.large</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>db_instance_type</name>
+          <description>db_instance_type</description>
+          <defaultValue>t3.large</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -54,7 +72,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@240.vc26740a_625c0">
       <playbook>/deployment/ansible/playbooks/memc/me-infra-create.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryDoNotSpecify"/>
       <limit></limit>
@@ -91,12 +109,23 @@
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_node_count</key>
-	  <value>${db_node_count}</value>
+          <value>${db_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>core_url</key>
-          <value>${CORE_URL}</value>
+          <value>${core_url}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>access_instance_type</key>
+          <value>${access_instance_type}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>db_instance_type</key>
+          <value>${db_instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

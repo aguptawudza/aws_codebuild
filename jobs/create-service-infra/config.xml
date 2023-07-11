@@ -83,32 +83,32 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQ/KSZfEFbuygkXCv/oHd+B9OoUJRDfm8w2f864vmQmuY=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>app_node_count</key>
-          <secretValue>{AQAAABAAAAAgKezCC2/HAoASAf4xpwr/+ZqxcVenbNoXEgy0iC55hLWMbQo5+gbHj2q8tdDdY9C+}</secretValue>
+          <value>{app_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_node_count</key>
-          <secretValue>{AQAAABAAAAAgZvcrQSqfZRvFaLnCLMjDE3XUZxu62cYTy86SqGMD7k06/DnvqIh2vC/ZhliTeLLg}</secretValue>
+          <value>${db_node_count}</value>
           <hidden>true</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQ8FiBAYPPlbEUcoynsV3gi+BJTkd7xGrQfCsuK+Fk3GE=}</secretValue>
+          <value>${service_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_version</key>
-          <secretValue>{AQAAABAAAAAgNXCWCQxEbCJSrQaFUQmBUQxGufHVzY0N0cSXl/lJNjvauagIy8drF2mRTl+7zC+s}</secretValue>
+          <value>${service_version}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>instance_type</key>
-          <secretValue>{AQAAABAAAAAgDcEsG4TYn75JMm1AndJ7RbOw5XirOjhZp2AUsc4CVDJB2ibTDElmMq05kNcvaoFj}</secretValue>
+          <value>${instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
