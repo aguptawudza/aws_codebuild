@@ -123,6 +123,10 @@
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>app_instance_type</key>
+          <value>${app_instance_type}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_instance_type</key>
           <value>${db_instance_type}</value>
