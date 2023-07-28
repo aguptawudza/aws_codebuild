@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Delete Infra</description>
+  <description>Delete Service</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -16,12 +16,13 @@
       <parameterDefinitions>
         <hudson.model.StringParameterDefinition>
           <name>ent_name</name>
-          <description>Please provide Enterprise Name</description>
-          <trim>false</trim>
+          <description>Please provide the Enterprise Name</description>
+          <trim>true</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>service_url</name>
-          <description>service_url</description>
+          <name>service_name</name>
+          <description>Name of the Service which needs to be deployed</description>
+          <defaultValue>suite</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -36,9 +37,11 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@240.vc26740a_625c0">
-      <playbook>/deployment/ansible/playbooks/memc/me-infra-terminate.yml</playbook>
-      <inventory class="org.jenkinsci.plugins.ansible.InventoryDoNotSpecify"/>
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
+      <playbook>/deployment/ansible/playbooks/memc/terminate-service-infra.yml</playbook>
+      <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
+        <path>/deployment/ansible/playbooks/memc/inventory</path>
+      </inventory>
       <limit></limit>
       <tags></tags>
       <skippedTags></skippedTags>
@@ -53,29 +56,22 @@
       <unbufferedOutput>true</unbufferedOutput>
       <colorizedOutput>false</colorizedOutput>
       <disableHostKeyChecking>false</disableHostKeyChecking>
-      <additionalParameters>-vv</additionalParameters>
+      <additionalParameters></additionalParameters>
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQlNB4VJZCC4Vo22c8asGGNDrZl08vhW3VwNad98Jd8G8=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>service_url</key>
-          <secretValue>{AQAAABAAAAAQKOwD6VYfjH1hQrCS1Yr/+CrLRlNpJ8L82bU+VC2U1Gk=}</secretValue>
+          <key>service_name</key>
+	  <value>${service_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
     </org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder>
   </builders>
   <publishers/>
-  <buildWrappers>
-    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.45">
-      <deleteDirs>false</deleteDirs>
-      <cleanupParameter></cleanupParameter>
-      <externalDelete></externalDelete>
-      <disableDeferredWipeout>false</disableDeferredWipeout>
-    </hudson.plugins.ws__cleanup.PreBuildCleanup>
-  </buildWrappers>
+  <buildWrappers/>
 </project>

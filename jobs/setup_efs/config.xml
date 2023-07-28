@@ -28,6 +28,7 @@
         <hudson.model.StringParameterDefinition>
           <name>core_url</name>
           <description>CORE URL</description>
+          <defaultValue>monoly.net</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -65,17 +66,17 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <value>${ent_name}</value>
+          <secretValue>{AQAAABAAAAAQBwNuEDBGqHQLWvRvp5QeAKC33QtS0MxYoQbghvoaqoA=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <value>${service_name}</value>
+          <secretValue>{AQAAABAAAAAQHMruB1TMp4VdaB/TWRQ4mJtQFVgXAH4FQFlUvFHC0hk=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>core_url</key>
-          <value>${core_url}</value>
+          <secretValue>{AQAAABAAAAAQRtf4APMknRrQ1hq1zhPjHVHj1twiQWY9nFnErTZJAJM=}</secretValue>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

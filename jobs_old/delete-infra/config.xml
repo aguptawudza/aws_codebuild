@@ -19,11 +19,6 @@
           <description>Please provide Enterprise Name</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
-        <hudson.model.StringParameterDefinition>
-          <name>service_url</name>
-          <description>service_url</description>
-          <trim>false</trim>
-        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -58,12 +53,7 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQlNB4VJZCC4Vo22c8asGGNDrZl08vhW3VwNad98Jd8G8=}</secretValue>
-          <hidden>false</hidden>
-        </org.jenkinsci.plugins.ansible.ExtraVar>
-        <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>service_url</key>
-          <secretValue>{AQAAABAAAAAQKOwD6VYfjH1hQrCS1Yr/+CrLRlNpJ8L82bU+VC2U1Gk=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

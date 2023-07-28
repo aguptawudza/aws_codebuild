@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Setup VMs</description>
+  <description>Create Service Infra</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <jenkins.model.BuildDiscarderProperty>
@@ -17,22 +17,35 @@
         <hudson.model.StringParameterDefinition>
           <name>ent_name</name>
           <description>Please provide the Enterprise Name</description>
-          <trim>false</trim>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>app_node_count</name>
+          <description>Number of Application Nodes</description>
+          <defaultValue>1</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>db_node_count</name>
+          <description>Number of DB node counts</description>
+          <defaultValue>1</defaultValue>
+          <trim>true</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>service_name</name>
-          <description>Service Name</description>
-          <defaultValue>monoly</defaultValue>
-          <trim>false</trim>
+          <description>Service Name </description>
+          <trim>true</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>core_url</name>
-          <description>CORE URL</description>
-          <trim>false</trim>
+          <name>service_version</name>
+          <description>Version of the Service</description>
+          <defaultValue>latest</defaultValue>
+          <trim>true</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
-          <name>service_url</name>
-          <description>service_url</description>
+          <name>instance_type</name>
+          <description>Type of AWS Instances</description>
+          <defaultValue>t2.micro</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -46,8 +59,8 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@240.vc26740a_625c0">
-      <playbook>/deployment/ansible/playbooks/memc/setup-vm.yml</playbook>
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
+      <playbook>/deployment/ansible/playbooks/memc/create-service-infra.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
         <path>/deployment/ansible/playbooks/memc/inventory</path>
       </inventory>
@@ -70,22 +83,32 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQqfGb/8I9xU4ff80aMcVdfVy6lQcsEeXXaEusVV+3AtY=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>app_node_count</key>
+          <value>{app_node_count}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>db_node_count</key>
+          <value>${db_node_count}</value>
+          <hidden>true</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQhjEmV6YHM6dJb7j6Npi8HlyZ+l6MdD2noMPphVyiKjE=}</secretValue>
+          <value>${service_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>core_url</key>
-          <secretValue>{AQAAABAAAAAQYL/+Y1dWzP/8eG0zAuGyJsi4PNguUXUBCUJRc91b0UE=}</secretValue>
+          <key>service_version</key>
+          <value>${service_version}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
-          <key>service_url</key>
-          <secretValue>{AQAAABAAAAAQFR8xR1fu+QTNQaTx7Gzbiy0eNuJx2K31uhsAb/uGuA8=}</secretValue>
+          <key>instance_type</key>
+          <value>${instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
