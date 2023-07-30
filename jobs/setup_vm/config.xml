@@ -70,22 +70,22 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <secretValue>{AQAAABAAAAAQqfGb/8I9xU4ff80aMcVdfVy6lQcsEeXXaEusVV+3AtY=}</secretValue>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-          <secretValue>{AQAAABAAAAAQhjEmV6YHM6dJb7j6Npi8HlyZ+l6MdD2noMPphVyiKjE=}</secretValue>
+          <value>${service_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>core_url</key>
-          <secretValue>{AQAAABAAAAAQYL/+Y1dWzP/8eG0zAuGyJsi4PNguUXUBCUJRc91b0UE=}</secretValue>
+	  <value>${core_url}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_url</key>
-          <secretValue>{AQAAABAAAAAQFR8xR1fu+QTNQaTx7Gzbiy0eNuJx2K31uhsAb/uGuA8=}</secretValue>
+          <value>${service_url}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

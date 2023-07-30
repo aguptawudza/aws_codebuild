@@ -104,52 +104,52 @@
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ent_name</key>
-          <value>{AQAAABAAAAAQvHedoreI0pU+ExodFURQhVsFH5CEmlGxntQ8WsNlQbM=}</value>
+          <value>${ent_name}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>region</key>
-          <value>{AQAAABAAAAAQ6VDIJgMTfkb77VQ27RZwGuqIi702t1FvNdSJWqEb9F0=}</value>
+          <value>${region}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>app_node_count</key>
-          <value>{AQAAABAAAAAgHjaR8m8Fw78qv+kpnnJ8iJ9JIo8sLnM5OySt2QNjLtKziF5ddZcIA9ApZSfqKe3u}</value>
+          <value>${app_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_node_count</key>
-          <value>{AQAAABAAAAAgKfY5BwG26cbikOTdaE46g0y2zHE2IdFuq1M+hfyO2hPrirYFAZCwDF9G+5pVmwrF}</value>
+          <value>${db_node_count}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>core_url</key>
-          <value>{AQAAABAAAAAQwxFDVwjWcvmGEY4IJSw1+CP2XhEM7Ew1Ia/6LwwuJgs=}</value>
+          <value>${core_url}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>access_instance_type</key>
-          <value>{AQAAABAAAAAgqK93YtwCjZe2cUr11a2NY/d1wYv/GIgsA6oALBdUU+nUlrEExEnEj5G8LVARho6j}</value>
+          <value>${access_instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>app_instance_type</key>
-          <value>{AQAAABAAAAAgmO4gLGN1DOVi1K8MAoJ/OhROjj9QrrCDxawe14fi2zlhGmtoP1ePDdqZsQJLzaoO}</value>
+          <value>${app_instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>db_instance_type</key>
-          <value>{AQAAABAAAAAgFXToZIztcQXnwTO8/PwSvMo6xnO11cM6/9d53jkUp5MLA+Lacjti6E17aDjn7J8a}</value>
+          <value>${db_instance_type}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ami</key>
-          <value>{AQAAABAAAAAQIp3EYQqTGbbWjo5wrhcQ8PS9kROOs7TBGI2ivuEZYE4=}</value>
+          <value>${ami}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_url</key>
-          <value>{AQAAABAAAAAQYpU7c6hWXoebTzcXmRWE4f5ybQ4I3e56AcPPCA9b1hA=}</value>
+          <value>${service_url}</value>
           <hidden>true</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
