@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install python3 -y && \
     apt-get install python3-pip -y && \
     apt-get install sudo -y && \
     apt-get install vim -y && \
+    apt-get install awscli -y && \
     pip3 install ansible --upgrade && \
     pip3 install boto3 --upgrade && \
     pip3 install botocore --upgrade && \
