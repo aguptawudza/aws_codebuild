@@ -71,6 +71,11 @@
           <description>service_url</description>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vpcCidrBlock</name>
+          <defaultValue>10.50.1.0/24</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -151,6 +156,11 @@
           <key>service_url</key>
           <value>${service_url}</value>
           <hidden>true</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>vpcCidrBlock</key>
+          <value>${vpcCidrBlock}</value>
+          <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
     </org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder>

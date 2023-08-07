@@ -72,7 +72,7 @@
         <hudson.model.StringParameterDefinition>
           <name>service_version</name>
           <description>service_version</description>
-          <defaultValue>0.0.10</defaultValue>
+          <defaultValue>0.0.15</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -117,6 +117,11 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>service_url</name>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vpcCidrBlock</name>
+          <defaultValue>10.50.1.0/24</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -196,6 +201,7 @@ pipeline
                             string(name: &apos;app_instance_type&apos;,value: &quot;${app_instance_type}&quot;),
                             string(name: &apos;service_url&apos;,value: &quot;${service_url}&quot;),
                             string(name: &apos;ami&apos;,value: &quot;${ami}&quot;),
+                            string(name: &apos;vpcCidrBlock&apos;,value: &quot;${vpcCidrBlock}&quot;),
                             string(name: &apos;db_instance_type&apos;,value: &quot;${db_instance_type}&quot;)
                         ]
                         previousStageResult = true
@@ -245,6 +251,7 @@ pipeline
                             string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
                             string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
                             string(name: &apos;service_url&apos;,value: &quot;${service_url}&quot;),
+                            string(name: &apos;vpcCidrBlock&apos;,value: &quot;${vpcCidrBlock}&quot;),
                             string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)
                             ]
                         previousStageResult = true
@@ -289,7 +296,11 @@ pipeline
             steps {
                 script {
                     try {
-                        build job: &quot;setup_efs&quot; , parameters:[string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)]
+                        build job: &quot;setup_efs&quot; , parameters:[
+                            string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
+                            string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
+                            string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)
+                            ]
                         previousStageResult = true
                     }
                     catch (Exception e) {
@@ -332,7 +343,12 @@ pipeline
             steps {
                 script {
                     try {
-                        build job: &quot;deploy_cluster&quot; , parameters:[string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)]
+                        build job: &quot;deploy_cluster&quot; , parameters:
+                        [
+                            string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
+                            string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
+                            string(name: &apos;vpcCidrBlock&apos;,value: &quot;${vpcCidrBlock}&quot;),
+                            string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)]
                         previousStageResult = true
                     }
                     catch (Exception e) {
@@ -387,6 +403,7 @@ pipeline
                             string(name: &apos;compose_path&apos;,value: &quot;${compose_path}&quot;),
                             string(name: &apos;service_version&apos;,value: &quot;${service_version}&quot;),
                             string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;),
+                            string(name: &apos;vpcCidrBlock&apos;,value: &quot;${vpcCidrBlock}&quot;),
                             string(name: &apos;ENV_SA_EMAIL&apos;,value: &quot;${ENV_SA_EMAIL}&quot;),
                         ]
                         previousStageResult = true

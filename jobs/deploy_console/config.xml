@@ -52,13 +52,17 @@
         <hudson.model.StringParameterDefinition>
           <name>service_version</name>
           <description>service_version</description>
-          <defaultValue>0.0.8</defaultValue>
+          <defaultValue>0.0.15</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>ENV_SA_EMAIL</name>
           <description>ENV_SA_EMAIL</description>
-          <defaultValue>akaushal@wudza.com</defaultValue>
+          <defaultValue>agupta@wudza.com</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>vpcCidrBlock</name>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
@@ -131,7 +135,12 @@
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>ENV_SA_EMAIL</key>
-          <value>${ENV_SA_EMAIL}</value>
+	  <value>${ENV_SA_EMAIL}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>vpcCidrBlock</key>
+          <value>${vpcCidrBlock}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>

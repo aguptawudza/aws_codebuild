@@ -55,12 +55,12 @@
         <hudson.model.StringParameterDefinition>
           <name>compose_path</name>
           <description>compose_path</description>
-          <defaultValue>https://transfer.sh/wUb3Xd1MFX/docker-compose.yaml</defaultValue>
+          <defaultValue>https://transfer.sh/qg3FG9dfPl/suite_compose.yaml</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>service_version</name>
-          <defaultValue>0.0.10</defaultValue>
+          <defaultValue>0.19.77</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -71,7 +71,7 @@
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
           <name>server_url</name>
-          <defaultValue>https://webhook.site/d5490b10-0268-4893-a3d6-8f1e698a559a</defaultValue>
+          <defaultValue>https://webhook.site/16f8729d-d711-4736-a55c-f36256c43402</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -115,6 +115,15 @@
           <defaultValue>50</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>service_url</name>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>region</name>
+          <defaultValue>us-east-1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -153,7 +162,7 @@ pipeline
                         }
                     }
                     steps {
-                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=101&amp;response_string=Inventory%20Created%20Successfully&quot;&apos;
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=101&amp;response_string=Monoly%20Suite%20Inventory%20Created%20Successfully&quot;&apos;
                     }
                 }
                 stage(&apos;false&apos;) {
@@ -180,6 +189,8 @@ pipeline
                 {
                         build job: &apos;create-service-infra&apos; , parameters:[
                             string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;),
+                            string(name: &apos;ami&apos;,value: &quot;${ami}&quot;),
+                            string(name: &apos;region&apos;,value: &quot;${region}&quot;),
                             string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;),
                             string(name: &apos;service_version&apos;,value: &quot;${service_version}&quot;),
                             string(name: &apos;app_node_count&apos;,value: &quot;${app_node_count}&quot;),
@@ -204,7 +215,48 @@ pipeline
                         }
                     }
                     steps {
-                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=101&amp;response_string=Monoly%20Suite%20Infra%20Created%20Successfully&quot;&apos;
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=102&amp;response_string=Monoly%20Suite%20Infra%20Created%20Successfully&quot;&apos;
+                    }
+                }
+                stage(&apos;false&apos;) {
+                    when {
+                        expression {
+                            return !previousStageResult
+                        }
+                    }
+                    steps {
+                        script {
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=500&amp;response_string=Internal%20Error&quot;&apos;
+                        currentBuild.result = &quot;FAILURE&quot;
+                        error(&apos;error message&apos;)
+                        sh &apos;exit 1&apos;
+                        }
+                    }
+                }
+            }
+        }
+        stage(&apos;Configure Monoly Enterprise Instances&apos;) {
+            steps {
+                script {
+                    build job: &quot;setup_vm&quot; , parameters:[ 
+                            string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
+                            string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
+                            string(name: &apos;service_url&apos;,value: &quot;${service_url}&quot;),
+                            string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)
+                        ]
+                }
+            }
+        }
+        stage(&apos;third-response&apos;) {
+            parallel {
+                stage(&apos;true&apos;) {
+                    when {
+                        expression {
+                            return previousStageResult
+                        }
+                    }
+                    steps {
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=103&amp;response_string=Monoly%20Suite%20VMs%20Configured%20Successfully&quot;&apos;
                     }
                 }
                 stage(&apos;false&apos;) {
@@ -241,44 +293,6 @@ pipeline
                 }
             }
         }
-        stage(&apos;third-response&apos;) {
-            parallel {
-                stage(&apos;true&apos;) {
-                    when {
-                        expression {
-                            return previousStageResult
-                        }
-                    }
-                    steps {
-                        echo &quot;Ansible Inventory Generated Successfully. Creating Infra..&quot;
-                    }
-                }
-                stage(&apos;false&apos;) {
-                    when {
-                        expression {
-                            return !previousStageResult
-                        }
-                    }
-                    steps {
-                        script {
-                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=500&amp;response_string=Internal%20Error&quot;&apos;
-                        currentBuild.result = &quot;FAILURE&quot;
-                        error(&apos;error message&apos;)
-                        sh &apos;exit 1&apos;
-                        }
-                    }
-                }
-            }
-        }
-        stage(&apos;Configure Monoly Enterprise Instances&apos;) {
-            steps {
-                script {
-                    build job: &quot;setup_vm&quot; , parameters:[ 
-                        string(name: &apos;CID&apos;,value: &quot;${CID}&quot;),
-                        string(name: &apos;cluster&apos;,value: &quot;${cluster}&quot;)]
-                }
-            }
-        }
         stage(&apos;fourth-response&apos;) {
             parallel {
                 stage(&apos;true&apos;) {
@@ -288,7 +302,7 @@ pipeline
                         }
                     }
                     steps {
-                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=103&amp;response_string=EFS%20Mounted%20on%20Monoly%20VMs%20Successfully&quot;&apos;
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=104&amp;response_string=Monoly%20Suite%20EFS%20Mounted%20On%20VMs%20Successfully&quot;&apos;
                     }
                 }
                 stage(&apos;false&apos;) {
@@ -312,8 +326,9 @@ pipeline
             steps {
                 script {
                     build job: &quot;deploy_cluster&quot; , parameters:[ 
-                        string(name: &apos;CID&apos;,value: &quot;${CID}&quot;),
-                        string(name: &apos;cluster&apos;,value: &quot;${cluster}&quot;)
+                            string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
+                            string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
+                            string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)
                     ]
                 } 
             }
@@ -327,7 +342,50 @@ pipeline
                         }
                     }
                     steps {
-                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=103&amp;response_string=EFS%20Mounted%20on%20Monoly%20VMs%20Successfully&quot;&apos;
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=105&amp;response_string=Monoly%20Suite%20Docker%20Swarm%20Cluster%20Deployed%20Successfully&quot;&apos;
+                    }
+                }
+                stage(&apos;false&apos;) {
+                    when {
+                        expression {
+                            return !previousStageResult
+                        }
+                    }
+                    steps {
+                        script {
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=500&amp;response_string=Internal%20Error&quot;&apos;
+                        currentBuild.result = &quot;FAILURE&quot;
+                        error(&apos;error message&apos;)
+                        sh &apos;exit 1&apos;
+                        }
+                    }
+                }
+            }
+        }
+        stage(&apos;Deploy Monoly Suite&apos;) {
+            steps {
+                script {
+                    build job: &quot;deploy_suite&quot; , parameters:[ 
+                            string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;), 
+                            string(name: &apos;compose_path&apos;,value: &quot;${compose_path}&quot;), 
+                            string(name: &apos;region&apos;,value: &quot;${region}&quot;),
+                            string(name: &apos;service_name&apos;,value: &quot;${service_name}&quot;), 
+                            string(name: &apos;service_url&apos;,value: &quot;${service_url}&quot;),
+                            string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;)
+                        ]
+                }
+            }
+        }
+        stage(&apos;final-response&apos;) {
+            parallel {
+                stage(&apos;true&apos;) {
+                    when {
+                        expression {
+                            return previousStageResult
+                        }
+                    }
+                    steps {
+                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=200&amp;response_string=Monoly%20Suite%20Deployment%20Completed%20Successfully&quot;&apos;
                     }
                 }
                 stage(&apos;false&apos;) {

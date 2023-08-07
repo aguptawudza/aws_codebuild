@@ -25,6 +25,11 @@
           <defaultValue>suite</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>region</name>
+          <defaultValue>us-east-1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -37,7 +42,7 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@217.v1696cee03265">
+    <org.jenkinsci.plugins.ansible.AnsiblePlaybookBuilder plugin="ansible@240.vc26740a_625c0">
       <playbook>/deployment/ansible/playbooks/memc/terminate-service-infra.yml</playbook>
       <inventory class="org.jenkinsci.plugins.ansible.InventoryPath">
         <path>/deployment/ansible/playbooks/memc/inventory</path>
@@ -56,7 +61,7 @@
       <unbufferedOutput>true</unbufferedOutput>
       <colorizedOutput>false</colorizedOutput>
       <disableHostKeyChecking>false</disableHostKeyChecking>
-      <additionalParameters></additionalParameters>
+      <additionalParameters>-vv</additionalParameters>
       <copyCredentialsInWorkspace>false</copyCredentialsInWorkspace>
       <extraVars>
         <org.jenkinsci.plugins.ansible.ExtraVar>
@@ -66,7 +71,12 @@
         </org.jenkinsci.plugins.ansible.ExtraVar>
         <org.jenkinsci.plugins.ansible.ExtraVar>
           <key>service_name</key>
-	  <value>${service_name}</value>
+          <value>${service_name}</value>
+          <hidden>false</hidden>
+        </org.jenkinsci.plugins.ansible.ExtraVar>
+        <org.jenkinsci.plugins.ansible.ExtraVar>
+          <key>region</key>
+          <value>${region}</value>
           <hidden>false</hidden>
         </org.jenkinsci.plugins.ansible.ExtraVar>
       </extraVars>
