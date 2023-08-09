@@ -5,6 +5,3 @@ jenkins:
       users:
         - id: ${JENKINS_ADMIN_ID}
           password: ${JENKINS_ADMIN_PASSWORD}
-unclassified:
-  location:
-    url: http://0.0.0.0:8080/        
