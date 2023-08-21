@@ -1,0 +1,214 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1316.vd2290d3341a_f">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2141.v5402e818a_779"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2141.v5402e818a_779">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description>Jenkins Job to complete the below tasks.&#xd;
+1) Create AWS Infrastructure for ME&#xd;
+2) Configure provisioned Instances&#xd;
+3) Deploy Swarm Cluster&#xd;
+4) Deploy ME Console</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <jenkins.model.BuildDiscarderProperty>
+      <strategy class="hudson.tasks.LogRotator">
+        <daysToKeep>30</daysToKeep>
+        <numToKeep>20</numToKeep>
+        <artifactDaysToKeep>-1</artifactDaysToKeep>
+        <artifactNumToKeep>-1</artifactNumToKeep>
+      </strategy>
+    </jenkins.model.BuildDiscarderProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+      <abortPrevious>false</abortPrevious>
+    </org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>ent_name</name>
+          <description>Please provide the newMonoly Enterprise Name</description>
+          <defaultValue>vivtest</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>region</name>
+          <description>AWS RegionName</description>
+          <defaultValue>us-east-1</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.ChoiceParameterDefinition>
+          <name>State</name>
+          <choices class="java.util.Arrays$ArrayList">
+            <a class="string-array">
+              <string>Add</string>
+              <string>Delete</string>
+            </a>
+          </choices>
+        </hudson.model.ChoiceParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>request_id</name>
+          <description>request_id</description>
+          <defaultValue>1234567890</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>server_url</name>
+          <defaultValue>https://webhook.site/d5490b10-0268-4893-a3d6-8f1e698a559a</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>cidr</name>
+          <defaultValue>1.1.1.1/32</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>core_url</name>
+          <defaultValue>monoly.net</defaultValue>
+          <trim>true</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@3705.va_6a_c2775a_c17">
+    <script>previousStageResult = false
+pipeline 
+{
+    agent any
+    stages{
+        stage(&apos;Add Rule in Security Group&apos;){
+            steps{
+                script{
+                    try {
+                        script{
+                            if (env.State == &quot;Add&quot;) {
+                                build job: &apos;ADD_SG&apos; , parameters:
+                                [
+                                    string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;),
+                                    string(name: &apos;region&apos;,value: &quot;${region}&quot;),
+                                    string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;),
+                                    string(name: &apos;cidr&apos;,value: &quot;${cidr}&quot;)
+                                ]
+                                previousStageResult = true
+                            }    
+                        }
+                        previousStageResult = true
+                    }
+                    catch (Exception e) {
+                        currentBuild.result = &apos;SUCCESS&apos;
+                        previousStageResult = false
+                    }    
+                }
+            }
+        }
+        stage(&apos;add-response&apos;) {
+            parallel{
+                            stage(&apos;true&apos;) {
+                                
+                                        when {
+                                            expression {
+                                            return previousStageResult
+                                            }
+                                        }
+                                        steps {
+                                            script{
+                                                if (env.State == &quot;Add&quot;) {    
+                                                    sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=101&amp;response_string=Rule%20Added%20to%20Security%20Group%20Successfully&quot;&apos;
+                                                }
+                                            }
+                                        }    
+                            }
+                            stage(&apos;false&apos;) {
+                                when {
+                                    expression {
+                                    return !previousStageResult
+                                }
+                            }
+                            steps {
+                                script {
+                                    sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=500&amp;response_string=Internal%20Error&quot;&apos;
+                                    currentBuild.result = &quot;FAILURE&quot;
+                                    error(&apos;error message&apos;)
+                                    sh &apos;exit 1&apos;
+                                    }
+                                }
+                        }
+                    }
+        }
+        stage(&apos;Delete Rule in Security Group&apos;) 
+        {
+            steps 
+            {
+                script
+                {
+                    try {
+                        script{
+                             if (env.State == &quot;Delete&quot;) {
+                                build job: &apos;Remove_SG&apos; , parameters:
+                                [
+                                    string(name: &apos;ent_name&apos;,value: &quot;${ent_name}&quot;),
+                                    string(name: &apos;region&apos;,value: &quot;${region}&quot;),
+                                    string(name: &apos;core_url&apos;,value: &quot;${core_url}&quot;),
+                                    string(name: &apos;cidr&apos;,value: &quot;${cidr}&quot;)
+                                ]
+                                previousStageResult = true
+                                }
+                            }
+                        previousStageResult = true
+                    }
+                    catch (Exception e) {
+                        currentBuild.result = &apos;SUCCESS&apos;
+                        previousStageResult = false
+                    }        
+                }
+            }
+        }
+        stage(&apos;delete-response&apos;) 
+        {
+            parallel 
+            {
+                            stage(&apos;true&apos;) 
+                            {
+                                when {
+                                    expression {
+                                        return previousStageResult
+                                    }
+                                }
+                                steps {
+                                    script{
+                                        if (env.State == &quot;Delete&quot;) {                                     
+                                            sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=101&amp;response_string=Rule%20Deleted%20from%20Security%20Group%20Successfully&quot;&apos;
+                                        }
+                                    }    
+                                }
+                            }
+                            stage(&apos;false&apos;) {
+                                when {
+                                    expression {
+                                        return !previousStageResult
+                                    }
+                                }
+                                steps {
+                                    script {
+                                        sh &apos;curl &quot;${server_url}?request_id=${request_id}&amp;response_code=500&amp;response_string=Internal%20Error&quot;&apos;
+                                        currentBuild.result = &apos;FAILURE&apos;
+                                        error(&apos;error message&apos;)
+                                        sh &apos;exit 1&apos;
+           
+                                    }
+                                }
+                            }
+                        }
+        }   
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <authToken>9012873465</authToken>
+  <disabled>false</disabled>
+</flow-definition>
